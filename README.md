@@ -2,8 +2,6 @@
 
 ### HTTP Request and lifecycle methods.
 
-Test this app:
-
 > check here for the **React Hooks version of the todos app**:
 
 ## Clone this project
