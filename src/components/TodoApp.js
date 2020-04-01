@@ -2,27 +2,13 @@ import React from "react";
 import Todos from "./Todos";
 import Header from "./layout/Header";
 import AddTodo from "./AddTodo";
-import uuid from "uuid";
+
+import axios from "axios";
 
 class TodoApp extends React.Component {
   state = {
-    todos: [
-      {
-        id: uuid.v4(),
-        title: "Setup development environment",
-        completed: true
-      },
-      {
-        id: uuid.v4(),
-        title: "Develop website and add content",
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: "Deploy to live server",
-        completed: false
-      }
-    ]
+    todos: [],
+    show: false
   };
 
   handleChange = id => {
@@ -32,35 +18,48 @@ class TodoApp extends React.Component {
           todo.completed = !todo.completed;
         }
         return todo;
-      })
+      }),
+      show: !this.state.show
     });
   };
 
   deleteTodo = id => {
-    this.setState({
-      todos: [
-        ...this.state.todos.filter(todo => {
-          return todo.id !== id;
+    axios
+      .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(reponse =>
+        this.setState({
+          todos: [
+            ...this.state.todos.filter(todo => {
+              return todo.id !== id;
+            })
+          ]
         })
-      ]
-    });
+      );
   };
 
   addTodo = title => {
-    const newTodo = {
-      id: uuid.v4(),
-      title: title,
-      completed: false
-    };
-    this.setState({
-      todos: [...this.state.todos, newTodo]
-    });
+    axios
+      .post("https://jsonplaceholder.typicode.com/todos", {
+        title: title,
+        completed: false
+      })
+      .then(response =>
+        this.setState({
+          todos: [...this.state.todos, response.data]
+        })
+      );
   };
+
+  componentDidMount() {
+    axios
+      .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
+      .then(response => this.setState({ todos: response.data }));
+  }
 
   render() {
     return (
       <div className="container">
-        <Header />
+        <Header headerSpan={this.state.show} />
         <AddTodo addTodo={this.addTodo} />
         <Todos
           todos={this.state.todos}

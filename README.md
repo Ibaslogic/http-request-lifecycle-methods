@@ -4,8 +4,6 @@
 
 Test this app:
 
-[ibaslogic.github.io/todoapp](https://ibaslogic.github.io/todoapp/)
-
 > check here for the **React Hooks version of the todos app**:
 
 ## Clone this project
@@ -13,14 +11,14 @@ Test this app:
 You can download or clone this project by running this command from your terminal:
 
 ```
-git clone https://github.com/Ibaslogic/todoapp/
+git clone https://github.com/Ibaslogic/http-request-lifecycle-methods
 ```
 
-This will create a directory in the name of the project folder. In this case, `todoapp`.
+This will create a directory in the name of the project folder. In this case, `http-request-lifecycle-methods`.
 
 Once you have the project files and folders bootstrapped, open it with your text editor. Here, I will be using VsCode.
 
-Next, switch inside the directory (`cd todoapp`) and run:
+Next, switch inside the directory (`cd http-request-lifecycle-methods`) and run:
 
 ```
 npm install
